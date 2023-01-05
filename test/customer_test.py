@@ -1,49 +1,55 @@
 import customtkinter
+import tkinter as tk
 
 customtkinter.set_appearance_mode("dark")  # System theme for our application
 customtkinter.set_default_color_theme("dark-blue")  # Color theme for our application
 
 root = customtkinter.CTk()
-root.geometry("750x530")
 root.title("Flashcards")
 
 
-def login():
-    print("test")
+# Login screen
+def login_screen():
+    login.tkraise()
+    # login menu
+    login.pack_propagate(False)
+
+    label = customtkinter.CTkLabel(
+        master=login,
+        text="Login System",
+    )
+    label.pack()
+
+    entry1 = customtkinter.CTkEntry(master=login, placeholder_text="Username")
+    entry1.pack()
+
+    entry2 = customtkinter.CTkEntry(master=login, placeholder_text="Password", show="$")
+    entry2.pack()
+
+    button = customtkinter.CTkButton(
+        master=login, text="Login", command=lambda: homepage_screen()
+    )
+    button.pack()
+
+    checkbox = customtkinter.CTkCheckBox(master=login, text="Remember me")
+    checkbox.pack()
 
 
-# login menu
-frame = customtkinter.CTkFrame(master=root)
-frame.pack(pady=20, padx=60, fill="both", expand=True)
+def homepage_screen():
+    homepage.tkraise()
+    homepage.pack_propagate(False)
 
-# after login
-frame2 = customtkinter.CTkFrame(master=root)
-frame.pack()
+    homepage.pack()
 
-label = customtkinter.CTkLabel(
-    master=frame,
-    text="Login System",
-)
-label.pack(pady=12, padx=10)
-
-entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Username")
-entry1.pack(pady=12, padx=10)
+    test = customtkinter.CTkLabel(master=homepage, text="You made it")
+    test.pack()
 
 
-entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Password", show="$")
-entry2.pack(pady=12, padx=10)
+login = customtkinter.CTkFrame(master=root, width=500, height=600)
+homepage = customtkinter.CTkFrame(master=root)
 
-button = customtkinter.CTkButton(master=frame, text="Login", command=login)
-button.pack(pady=12, padx=10)
+for frame in (login, homepage):
+    frame.pack()
 
-checkbox = customtkinter.CTkCheckBox(master=frame, text="Remember me")
-checkbox.pack(pady=12, padx=10)
-
-dropdown = customtkinter.CTkComboBox(
-    master=frame, values=["options1", "options2", "options3"]
-)
-dropdown.pack(padx=20, pady=10)
-dropdown.set("options1")
-
-
+login_screen()
 root.mainloop()
